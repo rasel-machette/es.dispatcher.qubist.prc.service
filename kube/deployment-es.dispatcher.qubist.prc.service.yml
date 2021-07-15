@@ -1,0 +1,58 @@
+# ... Deployment YAML definition   
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aryadb
+  namespace: prc-nm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aryadb
+  template:
+    metadata:
+      labels:
+        app: dispatcher
+    spec:
+      containers:
+        - env:
+          - name: POSTGRES_URL
+            valueFrom:
+              secretKeyRef:
+                name: dispatcher-secrets
+                key: spring.datasource.url
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: dispatcher-secrets
+                key: spring.datasource.username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: dispatcher-secrets
+                key: spring.datasource.password
+    spec:
+      nodeName: v06-k8smaster-main
+      containers:
+        - name: app
+          image: raselmachette/dispatcher-service:1.0.1
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+
+          
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: dispatcher
+  namespace: prc-nm
+spec:
+  selector:
+    app: aryadb
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
+  loadBalancerIP: 95.179.189.132

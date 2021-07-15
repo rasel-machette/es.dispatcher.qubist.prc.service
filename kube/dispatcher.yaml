@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  spring.datasource.url: amRiYzpwb3N0Z3Jlc3FsOi8vOTUuMTc5LjE4OS4xMzI6MzEzMjcvcG9zdGdyZXNkYg==
+  spring.datasource.username: cG9zdGdyZXNhZG1pbg==
+  spring.datasource.password: cG9TdEdyZXM2NzUj
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: dispatcher-secrets
+  namespace: default
+  # resourceVersion: "71363"
+  selfLink: /api/v1/namespaces/default/secrets/dispatcher-secrets
+  #uid: a0e0254e-9d4e-11e7-9b8d-080027da6995
+type: Opaque
