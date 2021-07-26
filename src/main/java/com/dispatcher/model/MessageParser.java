@@ -6,7 +6,7 @@ import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.search.SubjectTerm;
+
 
 public class MessageParser {
 	public static String getMessageBody(Message message) throws MessagingException, IOException {
